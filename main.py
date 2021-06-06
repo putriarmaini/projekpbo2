@@ -1,33 +1,28 @@
 import wx
-import noname
+import daftarbuku
 
-class subClass(noname.frameLogin):
+class buku(daftarbuku.framedaftarbuku):
+    def __init__(self,parent):
+        wx.MessageBox('Selamat datang di Gudang Toko Buku', 'Welcome', wx.OK | wx.ICON_INFORMATION)
+        daftarbuku.framedaftarbuku.__init__(self, parent)
+    
     def __init__(self, parent):
-        noname.frameLogin.__init__(self,parent)
-        self.database = {"user":"admin"}
-
+        daftarbuku.framedaftarbuku.__init__(self,parent)
+        self.database = {"tokobuku":"buku"}
+    
     def cek(self):
-        self.username = self.m_username.GetValue()
-        self.password = self.m_password.GetValue()
+        self.namabuku = self.inputnamabuku.GetValue()
+        self.jenisbuku = self.inputjenisbuku.GetValue()
+        self.hargabuku = self.inputhargabuku.GetValue()
+        self.stokbuku = self.inputstokbuku.GetValue()
 
-    def RegisterButton(self, event):
+    def m_button2OnButtonClick(self, event):
         self.cek()
-        self.database[self.username] = self.password
-        wx.MessageBox("Pendaftaran Berhasil")
+        self.database[self.namabuku] = self.jenisbuku
+        wx.MessageBox("Data Buku Berhasil di Tambahkan")
 
-    def LoginButton(self, event):
-        self.cek()
-        try:
-            if self.database[self.username] == self.password:
-                wx.MessageBox("Login Berhasil")
-            else:
-                wx.MessageBox("Login Gagal")
-
-        except:
-            wx.MessageBox("Login Gagal")
-
-app = wx.App()
-frame = subClass(parent=None)
-frame.Show()
-app.MainLoop()
-        
+if __name__ == "__main__":
+    app = wx.App()
+    frame = buku(parent=None)
+    frame.Show()
+    app.MainLoop()
