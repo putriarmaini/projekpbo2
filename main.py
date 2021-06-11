@@ -1,28 +1,45 @@
 import wx
-import daftarbuku
+import noname
+# import routes
+import database
 
-class buku(daftarbuku.framedaftarbuku):
-    def __init__(self,parent):
-        wx.MessageBox('Selamat datang di Gudang Toko Buku', 'Welcome', wx.OK | wx.ICON_INFORMATION)
-        daftarbuku.framedaftarbuku.__init__(self, parent)
-    
+class subClass(noname.frameLogin):
     def __init__(self, parent):
-        daftarbuku.framedaftarbuku.__init__(self,parent)
-        self.database = {"tokobuku":"buku"}
-    
-    def cek(self):
-        self.namabuku = self.inputnamabuku.GetValue()
-        self.jenisbuku = self.inputjenisbuku.GetValue()
-        self.hargabuku = self.inputhargabuku.GetValue()
-        self.stokbuku = self.inputstokbuku.GetValue()
+        noname.frameLogin.__init__(self,parent)
+        self.database = database.Database()
+        
 
-    def m_button2OnButtonClick(self, event):
-        self.cek()
-        self.database[self.namabuku] = self.jenisbuku
-        wx.MessageBox("Data Buku Berhasil di Tambahkan")
+    def RegisterButton(self, event):
+        username = self.m_username.GetValue()
+        password = self.m_password.GetValue()
+        hasil = (username, password)
+        if (self.database.set_query("INSERT INTO admin (username, password) VALUES (%s, %s)", hasil)\
+                .execute()\
+                .get_rowcount() > 0):
+            wx.MessageBox("Data Admin berhasil Ditambah", "Berhasil")
+        else:
+            wx.MessageBox("Data Admin gagal Ditambah", "Gagal")
 
-if __name__ == "__main__":
-    app = wx.App()
-    frame = buku(parent=None)
-    frame.Show()
-    app.MainLoop()
+    def LoginButton(self, event):
+        username = self.m_username.GetValue()
+        password = self.m_password.GetValue()
+        queryResult = self.database.set_query("SELECT * FROM `admin` WHERE `username` = '%s'"%(username))\
+                                   .fetch()
+        if (queryResult is not None):
+            if (password == queryResult[2]):
+                self.m_password.SetValue("")
+                wx.MessageBox("Anda Berhasil Masuk")
+                # routes.Init.subClass.Hide()
+                # routes.Init.buku.Show()
+            else:
+                wx.MessageBox("Username atau Password tidak sesuai", "Login Gagal")
+                self.m_password.SetValue("")
+        else:
+            wx.MessageBox("User dengan username tersebut tidak ditemukan", "Login Gagal")
+            self.m_password.SetValue("")
+
+app = wx.App()
+frame = subClass(parent=None)
+frame.Show()
+app.MainLoop()
+        
