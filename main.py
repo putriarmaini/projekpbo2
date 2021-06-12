@@ -1,12 +1,15 @@
 import wx
 import noname
-# import routes
+import routes
 import database
 
 class subClass(noname.frameLogin):
     def __init__(self, parent):
         noname.frameLogin.__init__(self,parent)
         self.database = database.Database()
+        # routes.Init.base(self)
+        # routes.Init.Main.Show()
+        # routes.Init.Main.SetSize(self.GetSize())
         
 
     def RegisterButton(self, event):
@@ -29,8 +32,8 @@ class subClass(noname.frameLogin):
             if (password == queryResult[2]):
                 self.m_password.SetValue("")
                 wx.MessageBox("Anda Berhasil Masuk")
-                # routes.Init.subClass.Hide()
-                # routes.Init.buku.Show()
+                routes.Init.bagianlogin.Hide()
+                routes.Init.bagiantambah.Show()
             else:
                 wx.MessageBox("Username atau Password tidak sesuai", "Login Gagal")
                 self.m_password.SetValue("")

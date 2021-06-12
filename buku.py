@@ -1,9 +1,9 @@
 import wx
-import noname
 import daftarbuku
 import database
+import routes
 
-class buku(daftarbuku.framedaftarbuku):
+class tambahbuku(daftarbuku.framedaftarbuku):
     def __init__(self,parent):
         wx.MessageBox('Selamat datang di Gudang Toko Buku', 'Welcome', wx.OK | wx.ICON_INFORMATION)
         daftarbuku.framedaftarbuku.__init__(self, parent)
@@ -21,11 +21,15 @@ class buku(daftarbuku.framedaftarbuku):
             wx.MessageBox("Data Buku berhasil Ditambah", "Berhasil")
         else:
             wx.MessageBox("Data Buku gagal Ditambah", "Gagal")
+    
+    def btnlihatbuku(self, event):
+        routes.Init.bagiantambah.Hide()
+        routes.Init.bagianbuku.Show()
 
 
 if __name__ == "__main__":
     app = wx.App()
-    frame = buku(parent=None)
+    frame = tambahbuku(parent=None)
     frame.Show()
     app.MainLoop()
 

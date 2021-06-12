@@ -1,6 +1,8 @@
 import wx
+from wx.core import Event
 import lihattransaksi
 import database
+import routes
 
 class databuku(lihattransaksi.MyFrame1):
     def __init__(self,parent):
@@ -33,6 +35,12 @@ class databuku(lihattransaksi.MyFrame1):
     def m_button7OnButtonClick( self, event ):
         row = event.GetRow()
         col = event.GetCol()
+
+    def m_button7OnButtonClick (self, event):
+        routes.Init.bagianpenjualan.Hide()
+        routes.Init.bagiantransaksi.Show()
+
+
 
 if __name__ == "__main__":
     app = wx.App()

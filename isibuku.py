@@ -1,6 +1,7 @@
 import wx
 import lihatbuku
 import database
+import routes
 
 class databuku(lihatbuku.MyFrame1):
     def __init__(self,parent):
@@ -33,6 +34,19 @@ class databuku(lihatbuku.MyFrame1):
     def datagridOnGridCmdSelectCell( self, event ):
         row = event.GetRow()
         col = event.GetCol()
+    
+    def inputbukuOnButtonClick(self): 
+        routes.Init.bagianbuku.Hide()
+        routes.Init.bagiantambah.Show()
+
+    def inputransaksiOnButtonClick(self):
+        routes.Init.bagianbuku.Hide()
+        routes.Init.bagiantransaksi.Show()
+
+    def daftartransaksiOnButtonClick(self, event):
+        routes.Init.bagianbuku.Hide()
+        routes.Init.bagianpenjualan.Show()
+                
 
 if __name__ == "__main__":
     app = wx.App()

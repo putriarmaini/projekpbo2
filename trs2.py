@@ -1,6 +1,7 @@
 import wx
 import trs1
 import database
+import routes
 
 class transaksi(trs1.MyFrame1):
     def __init__(self,parent):

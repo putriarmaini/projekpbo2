@@ -76,6 +76,9 @@ class MyFrame1 ( wx.Frame ):
 
 		# Connect Events
 		self.gridbuku.Bind( wx.grid.EVT_GRID_SELECT_CELL, self.gridbukuOnGridSelectCell )
+		self.inputbuku.Bind( wx.EVT_BUTTON, self.inputbukuOnButtonClick )
+		self.inputransaksi.Bind( wx.EVT_BUTTON, self.inputransaksiOnButtonClick )
+		self.daftartransaksi.Bind( wx.EVT_BUTTON, self.daftartransaksiOnButtonClick )
 
 	def __del__( self ):
 		pass
@@ -83,6 +86,15 @@ class MyFrame1 ( wx.Frame ):
 
 	# Virtual event handlers, overide them in your derived class
 	def gridbukuOnGridSelectCell( self, event ):
+		event.Skip()
+
+	def inputbukuOnButtonClick( self, event ):
+		event.Skip()
+
+	def inputransaksiOnButtonClick( self, event ):
+		event.Skip()
+
+	def daftartransaksiOnButtonClick( self, event ):
 		event.Skip()
 
 
